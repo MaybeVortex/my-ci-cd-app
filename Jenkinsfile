@@ -1,4 +1,4 @@
-pipeline {
+    pipeline {
     agent any
 
     environment {
@@ -7,12 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/MaybeVortex/my-ci-cd-app.git    '
-            }
-        }
-
         stage('Build Image') {
             steps {
                 sh 'docker build -t $IMAGE_NAME .'

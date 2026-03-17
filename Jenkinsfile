@@ -3,13 +3,13 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub-cred'
-        IMAGE_NAME = 'yourusername/register_roll'
+        IMAGE_NAME = 'nivien2023bcs0054/2023bcs0054'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/yourusername/repo-name.git'
+                git 'https://github.com/MaybeVortex/my-ci-cd-app.git    '
             }
         }
 

@@ -6,9 +6,22 @@ pipeline {
     }
 
     stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/MaybeVortex/my-ci-cd-app.git'
+            }
+        }
+
         stage('Build Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:latest .'
+                sh 'docker build -t $IMAGE_NAME .'
+            }
+        }
+
+        stage('Tag Image') {
+            steps {
+                sh 'docker tag $IMAGE_NAME $IMAGE_NAME:latest'
             }
         }
 
@@ -17,8 +30,7 @@ pipeline {
                 withCredentials([usernamePassword(
                     credentialsId: 'dockerhub-cred',
                     usernameVariable: 'USER',
-                    passwordVariable: 'PASS'
-                )]) {
+                    passwordVariable: 'PASS')]) {
                     sh 'echo $PASS | docker login -u $USER --password-stdin'
                 }
             }
